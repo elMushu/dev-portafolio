@@ -11,7 +11,7 @@ const { study, number } = Astro.props;
 
 <article class="card">
   <div class="card__meta">
-    <p class="card__id">Case Study {number}</p>
+    <p class="mono-label">Case Study {number}</p>
     {!study.validated && <p class="badge">Pending validation</p>}
   </div>
 
@@ -19,23 +19,44 @@ const { study, number } = Astro.props;
   <p>{study.summary}</p>
 
   {
-    study.metric && (
-      <div class="metric">
-        <p class="metric__note">{study.metric.label}</p>
-        <p class="metric__values">
-          <span>{study.metric.from}</span>
-          <span aria-hidden="true">→</span>
-          <span class="visually-hidden">to</span>
-          <span class="metric__to">{study.metric.to}</span>
-        </p>
-        {study.metric.reduction && (
-          <p class="metric__note">{study.metric.reduction}</p>
+    study.contribution && (
+      <div class="card__block">
+        <p class="mono-label">My contribution</p>
+        <ul class="card__list">
+          {study.contribution.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  {
+    (study.metric || study.outcome) && (
+      <div class="card__block">
+        <p class="mono-label">Outcome</p>
+
+        {study.metric && (
+          <div class="metric">
+            <p class="metric__note">{study.metric.label}</p>
+            <p class="metric__values">
+              <span>{study.metric.from}</span>
+              <span aria-hidden="true">→</span>
+              <span class="visually-hidden">to</span>
+              <span class="metric__to">{study.metric.to}</span>
+            </p>
+            {study.metric.reduction && (
+              <p class="metric__note">{study.metric.reduction}</p>
+            )}
+            {!study.metric.confirmed && (
+              <p class="metric__note metric__note--pending">
+                Metric pending confirmation
+              </p>
+            )}
+          </div>
         )}
-        {!study.metric.confirmed && (
-          <p class="metric__note metric__note--pending">
-            Metric pending confirmation
-          </p>
-        )}
+
+        {study.outcome && <p>{study.outcome}</p>}
       </div>
     )
   }
@@ -78,14 +99,6 @@ const { study, number } = Astro.props;
     gap: var(--space-xs);
   }
 
-  .card__id {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-
   .badge {
     padding: 0.15rem 0.5rem;
     border: 1px dashed var(--color-text-muted);
@@ -103,6 +116,36 @@ const { study, number } = Astro.props;
     letter-spacing: -0.01em;
     color: var(--color-navy);
     text-wrap: balance;
+  }
+
+  /* A labeled group: "My contribution" or "Outcome" */
+  .card__block {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .card__list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Same small green square marker used across the site */
+  .card__list li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .card__list li::before {
+    content: '';
+    position: absolute;
+    top: 0.6em;
+    left: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-green);
   }
 
   /* Before → after visual. Navy block so the green value stays readable. */

@@ -3,9 +3,9 @@ import { site } from '../data/site';
 
 // TODO: review copy. This draft only restates the profile; rewrite it in your own voice.
 const intro =
-  'I design and build backend systems with Java and Spring Boot, with a focus on microservices and distributed architectures.';
+  'I build backend services with Java and Spring Boot, with experience in microservices, REST APIs and process automation in the financial sector.';
 
-const focusAreas = ['Java Backend', 'Spring Boot', 'Distributed Systems'];
+const focusAreas = ['Java Backend', 'Spring Boot', 'Microservices'];
 ---
 
 <section id="home" class="hero is-dark" aria-labelledby="hero-title">
@@ -13,6 +13,7 @@ const focusAreas = ['Java Backend', 'Spring Boot', 'Distributed Systems'];
     <div class="hero__content">
       <h1 id="hero-title" class="hero__title">{site.name}</h1>
       <p class="hero__role">{site.role}</p>
+      <p class="hero__location">{site.location}</p>
 
       <ul class="hero__focus" aria-label="Professional focus">
         {focusAreas.map((area) => <li>{area}</li>)}
@@ -76,6 +77,13 @@ const focusAreas = ['Java Backend', 'Spring Boot', 'Distributed Systems'];
     font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
     font-weight: 600;
     color: var(--color-green);
+  }
+
+  .hero__location {
+    margin-top: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-text-on-dark-muted);
   }
 
   .hero__focus {

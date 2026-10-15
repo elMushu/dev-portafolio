@@ -32,6 +32,7 @@ const items = jobs.map((job) => ({
             <div class="job__info">
               <h3 class="job__company">{job.company}</h3>
               <p class="job__location">{job.location}</p>
+              {job.industry && <p class="job__industry">{job.industry}</p>}
 
               <ul class="job__positions">
                 {job.positions.map((position) => (
@@ -56,18 +57,30 @@ const items = jobs.map((job) => ({
             <div class="job__details">
               {job.highlights && (
                 <div class="highlights">
-                  <p class="highlights__label">Highlights</p>
-                  <ul class="highlights__list">
-                    {job.highlights.map((item) => (
-                      <li>{item}</li>
+                  <p class="mono-label">Key contributions</p>
+                  <dl class="highlights__list">
+                    {job.highlights.map((group) => (
+                      <div class="highlights__group">
+                        <dt>{group.theme}</dt>
+                        {group.items.map((item) => (
+                          <dd>{item}</dd>
+                        ))}
+                      </div>
                     ))}
-                  </ul>
+                  </dl>
                 </div>
               )}
 
               {job.studies.map(({ study, number }) => (
                 <ExperienceCard study={study} number={number} />
               ))}
+
+              {job.growth && (
+                <div class="growth">
+                  <p class="mono-label">Professional growth</p>
+                  <p>{job.growth}</p>
+                </div>
+              )}
             </div>
           </li>
         ))
@@ -108,7 +121,11 @@ const items = jobs.map((job) => ({
       align-items: start;
     }
 
-    /* Company info stays in view while its details scroll */
+  }
+
+  /* Company info stays in view while its details scroll. Only on tall screens:
+     a sticky block taller than the viewport would get cut off. */
+  @media (min-width: 56rem) and (min-height: 45rem) {
     .job__info {
       position: sticky;
       top: calc(var(--header-height) + var(--space-md));
@@ -160,35 +177,49 @@ const items = jobs.map((job) => ({
     gap: var(--space-md);
   }
 
-  .highlights__label {
+  .job__industry {
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--color-text-muted);
+  }
+
+  .growth {
+    display: grid;
+    gap: var(--space-xs);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
   }
 
   .highlights__list {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--space-md);
     margin: var(--space-sm) 0 0;
-    padding: 0;
-    list-style: none;
   }
 
-  /* Same small green square marker as "Beyond Code" */
-  .highlights__list li {
-    position: relative;
-    padding-left: 1.25rem;
+  .highlights__group {
+    display: grid;
+    gap: 0.25rem;
   }
 
-  .highlights__list li::before {
+  /* Theme title with the same small green square marker as "Beyond Code" */
+  .highlights__list dt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .highlights__list dt::before {
     content: '';
-    position: absolute;
-    top: 0.6em;
-    left: 0;
+    flex: none;
     width: 0.5rem;
     height: 0.5rem;
     background: var(--color-green);
+  }
+
+  .highlights__list dd {
+    margin: 0;
+    padding-left: 1.25rem;
   }
 </style>

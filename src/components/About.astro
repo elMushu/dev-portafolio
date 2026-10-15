@@ -1,11 +1,26 @@
 ---
-// TODO: review copy. Draft limited to what is already known about the profile; rewrite in your own voice.
+// Source: CLAUDE.md (portfolio context) and resume (CV.pdf)
 const paragraphs = [
-  "I'm a Software Engineer focused on backend development with Java and Spring Boot. My work centers on microservices, and I care about the technical decisions behind the code as much as the code itself.",
-  "I'm always learning, and I'm increasingly interested in distributed systems and software architecture.",
+  "I'm a Backend Software Engineer with nearly 3 years of professional experience building Java and Spring Boot services in the financial sector. At Banregio / Hey Banco I worked on microservices, REST APIs and internal automation tools, with a steady focus on testing, code quality and production support.",
+  "My path started in 2019 as a part-time developer intern at Universidad de Montemorelos, working on Java and Spring systems that included the university's Academic System, used daily by students, professors and administrative staff. That is where my interest in backend engineering began. A Front-End internship at OneCard then gave me hands-on experience with REST APIs, SQL and transaction monitoring in a fintech environment, before I moved into backend engineering at Banregio / Hey Banco.",
+  "Today I care about maintainable, well-tested backend code and about understanding the reasons behind technical decisions. I'm working on growing my knowledge of software architecture, with the goal of taking on more ownership of end-to-end backend solutions.",
 ];
 
 const hobbies = ['Tennis', 'Gym', 'Reading', 'Movies'];
+
+const facts = [
+  {
+    term: 'Education',
+    details: [
+      'B.S. in Computer Systems Engineering',
+      'Universidad de Montemorelos',
+    ],
+  },
+  {
+    term: 'Languages',
+    details: ['Spanish: Native', 'English: B2 (Upper-Intermediate)'],
+  },
+];
 ---
 
 <section id="about" class="section" aria-labelledby="about-title">
@@ -18,12 +33,27 @@ const hobbies = ['Tennis', 'Gym', 'Reading', 'Movies'];
         {paragraphs.map((text) => <p>{text}</p>)}
       </div>
 
-      <aside class="beyond" aria-labelledby="beyond-title">
-        <h3 id="beyond-title" class="beyond__title">Beyond Code</h3>
-        <ul class="beyond__list">
-          {hobbies.map((hobby) => <li>{hobby}</li>)}
-        </ul>
-      </aside>
+      <div class="about__side">
+        <dl class="facts">
+          {
+            facts.map((fact) => (
+              <div class="facts__item">
+                <dt>{fact.term}</dt>
+                {fact.details.map((detail) => (
+                  <dd>{detail}</dd>
+                ))}
+              </div>
+            ))
+          }
+        </dl>
+
+        <aside class="beyond" aria-labelledby="beyond-title">
+          <h3 id="beyond-title" class="beyond__title">Beyond Code</h3>
+          <ul class="beyond__list">
+            {hobbies.map((hobby) => <li>{hobby}</li>)}
+          </ul>
+        </aside>
+      </div>
     </div>
   </div>
 </section>
@@ -47,6 +77,38 @@ const hobbies = ['Tennis', 'Gym', 'Reading', 'Movies'];
     display: grid;
     gap: var(--space-sm);
     max-width: 40rem;
+  }
+
+  .about__side {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+  }
+
+  .facts__item {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .facts dd {
+    margin: 0;
   }
 
   .beyond {

@@ -1,8 +1,9 @@
 export const site = {
   name: 'Jazer Torres',
-  role: 'Software Engineer',
+  role: 'Backend Software Engineer',
   description:
-    'Jazer Torres is a Software Engineer focused on Java backend, Spring Boot and distributed systems.',
+    'Jazer Torres is a Backend Software Engineer focused on Java, Spring Boot and microservices.',
+  location: 'Monterrey, Nuevo León, Mexico',
   email: 'eryjazer@gmail.com',
   github: 'https://github.com/elMushu',
   linkedin: 'https://www.linkedin.com/in/eryjazer/',
