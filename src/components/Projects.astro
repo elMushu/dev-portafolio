@@ -1,0 +1,50 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+import { site } from '../data/site';
+---
+
+<section
+  id="projects"
+  class="section section--divided"
+  aria-labelledby="projects-title"
+>
+  <div class="container">
+    <p class="section-label" aria-hidden="true">03</p>
+    <h2 id="projects-title" class="section-title">Projects</h2>
+    <p class="projects__intro">
+      Independent projects, focused on backend engineering. My professional work
+      is covered in Experience.
+    </p>
+
+    <div class="projects__grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    <p class="projects__more">
+      <a class="button button--outline" href={site.github}>
+        See my code on GitHub
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .projects__intro {
+    max-width: 40rem;
+    margin-top: var(--space-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* auto-fill keeps each card a sensible width even when there is only one */
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .projects__more {
+    margin-top: var(--space-lg);
+  }
+</style>

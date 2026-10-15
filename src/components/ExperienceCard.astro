@@ -21,6 +21,7 @@ const { study, number } = Astro.props;
   {
     study.metric && (
       <div class="metric">
+        <p class="metric__note">{study.metric.label}</p>
         <p class="metric__values">
           <span>{study.metric.from}</span>
           <span aria-hidden="true">→</span>

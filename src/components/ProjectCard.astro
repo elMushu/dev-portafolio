@@ -1,0 +1,89 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="card">
+  <p class:list={['status', { 'status--active': project.status === 'In Progress' }]}>
+    {project.status}
+  </p>
+
+  <h3 class="card__title">{project.title}</h3>
+  <p>{project.description}</p>
+
+  <ul class="tag-list" aria-label="Topics and technologies">
+    {project.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+
+  {
+    project.links && (
+      <ul class="card__links" aria-label="Project links">
+        {project.links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+  }
+
+  .status {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-text-muted);
+  }
+
+  /* Green square only for work that is actively being built */
+  .status--active::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-green);
+  }
+
+  .card__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-navy);
+  }
+
+  .card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card__links a {
+    color: var(--color-navy);
+    font-weight: 600;
+    text-underline-offset: 0.25em;
+  }
+</style>

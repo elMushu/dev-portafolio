@@ -1,9 +1,10 @@
-// Professional experience, most recent first.
-// Any text starting with "TODO" is a placeholder and is rendered with a placeholder style.
+// Professional experience, most recent first. Source: resume (CV.pdf).
 // `confirmed` / `validated` stay false until the information is verified. While false,
 // the page shows a visible "pending" badge so unverified data is not published by accident.
 
 export interface Metric {
+  // What was measured, so the numbers are not ambiguous
+  label: string;
   from: string;
   to: string;
   reduction?: string;
@@ -20,26 +21,35 @@ export interface CaseStudy {
   validated: boolean;
 }
 
+export interface Position {
+  title: string;
+  period: string;
+}
+
 export interface Job {
   company: string;
-  role: string;
-  period: string;
-  summary: string;
+  location: string;
+  // Most recent first
+  positions: Position[];
+  summary?: string;
   technologies?: string[];
+  highlights?: string[];
   caseStudies: CaseStudy[];
 }
 
 export const jobs: Job[] = [
   {
     company: 'Banregio / Hey Banco',
-    // TODO: confirm exact job title
-    role: 'Backend / Software Engineer',
-    period: 'TODO: dates',
-    summary: 'TODO: add a short, verified summary of the role.',
-    // Initial list. TODO: confirm which tools belong to each case study before attaching them there.
+    location: 'Monterrey, Nuevo León, Mexico',
+    positions: [
+      { title: 'Backend Developer Jr', period: 'Nov 2024 – Aug 2026' },
+      { title: 'Backend Developer Intern', period: 'Jan 2024 – Nov 2024' },
+    ],
+    summary: 'Backend engineering for internal banking automation.',
     technologies: [
-      'Java',
+      'Java 11',
       'Spring Boot',
+      'Spring Data JPA',
       'Microservices',
       'OpenShift',
       'GitHub Actions',
@@ -48,19 +58,24 @@ export const jobs: Job[] = [
       'SonarQube',
       'Checkmarx',
     ],
+    highlights: [
+      'Developed and maintained 10+ Java 11 / Spring Boot microservices, REST APIs and backend components, covering business logic, persistence, validation, exception handling and scheduled processes.',
+      'Created 1 tool and optimized 8+ solutions within Toolbox, an internal platform of ~30 process-automation tools, and refactored an authentication flow after a user-type deprecation across multiple microservices.',
+      'Supported a production High Availability initiative across Hey Banco and Banregio: coordinated standardized configuration adoption across dozens of teams and repositories, validated YAML/OpenShift configurations and troubleshot deployment issues.',
+      'Diagnosed issues across microservice and database layers, wrote unit tests with JUnit and Mockito, and addressed quality and security findings from SonarQube and Checkmarx.',
+    ],
     caseStudies: [
       {
         title: 'Reporting / Toolbox Automation',
         summary:
-          'Reporting automation delivered as part of an internal toolbox of process automation tools.',
-        // TODO: confirm technologies used in this case study
-        tags: ['Automation', 'Reporting'],
-        // TODO: confirm both numbers and the ~30 tools context before publishing
+          'Automated usage reporting for Toolbox, an internal platform of ~30 process-automation tools, with daily, weekly and monthly metrics and charts.',
+        tags: ['Automation', 'Reporting', 'Metrics'],
         metric: {
-          from: '30 min',
+          label: 'Report generation time',
+          from: '~30 min',
           to: '4 min',
-          reduction: '≈ 87% less time',
-          confirmed: false,
+          reduction: '~87% less time',
+          confirmed: true,
         },
         generalized: true,
         validated: true,
@@ -68,13 +83,13 @@ export const jobs: Job[] = [
       {
         title: 'AI Documentation Proof of Concept',
         summary:
-          'Proof of concept exploring AI-assisted documentation with Claude, automated through GitHub Actions workflows.',
+          'Implemented and optimized a proof of concept for an AI-assisted documentation pipeline using Claude, GitHub Actions and multi-repository workflows.',
         tags: ['Claude', 'GitHub Actions', 'YAML', 'Automation'],
-        // TODO: confirm the numbers before publishing
         metric: {
-          from: '15 min',
-          to: '5–7 min',
-          confirmed: false,
+          label: 'Agent execution time',
+          from: '~15 min',
+          to: '~5–7 min',
+          confirmed: true,
         },
         generalized: true,
         validated: true,
@@ -83,25 +98,43 @@ export const jobs: Job[] = [
   },
   {
     company: 'OneCard',
-    role: 'TODO: role',
-    period: 'TODO: dates',
-    summary: 'TODO: add a short, verified summary of the role.',
+    location: 'Mexico',
+    positions: [
+      { title: 'Front-End Developer Intern', period: 'Jan 2022 – Jul 2023' },
+    ],
+    summary: 'Developed administrative web functionality.',
     caseStudies: [
       {
         title: 'Production Transaction Monitor',
         summary:
-          'A monitoring tool for production transactions. It reads transaction data through REST APIs and SQL Server, shows historical trends with Chart.js, and raises alerts after consecutive failures.',
+          'A production transaction-monitoring application that consumes REST APIs and integrates with SQL Server. It includes 4 Chart.js visualizations and alerts for consecutive failed transactions.',
         tags: ['REST APIs', 'SQL Server', 'Chart.js'],
-        // TODO: validate exact contribution
-        validated: false,
+        generalized: true,
+        validated: true,
       },
     ],
   },
   {
     company: 'Universidad de Montemorelos',
-    role: 'TODO: role',
-    period: 'TODO: dates',
-    summary: 'TODO: add verified responsibilities.',
+    location: 'Montemorelos, Nuevo León, Mexico',
+    positions: [
+      {
+        title: 'Software Developer Intern (Part-Time)',
+        period: 'Aug 2019 – Dec 2021',
+      },
+    ],
+    summary:
+      'Part-time role supporting systems used by university staff and academic operations.',
+    technologies: [
+      'Java',
+      'Spring Boot',
+      'JPA / Hibernate',
+      'JavaScript',
+      'Oracle',
+    ],
+    highlights: [
+      'Contributed to ~3 internal applications and 20+ features.',
+    ],
     caseStudies: [],
   },
 ];

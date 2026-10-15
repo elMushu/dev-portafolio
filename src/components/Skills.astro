@@ -1,0 +1,50 @@
+---
+import { skillCategories } from '../data/skills';
+---
+
+<section
+  id="skills"
+  class="section section--divided"
+  aria-labelledby="skills-title"
+>
+  <div class="container">
+    <p class="section-label" aria-hidden="true">04</p>
+    <h2 id="skills-title" class="section-title">Skills</h2>
+
+    <div class="skills__grid">
+      {
+        skillCategories.map((category) => (
+          <div class="category">
+            <h3 class="category__name">{category.name}</h3>
+            <ul class="tag-list">
+              {category.items.map((item) => (
+                <li class="tag">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-lg) var(--space-xl);
+    margin-top: var(--space-lg);
+  }
+
+  .category {
+    display: grid;
+    align-content: start;
+    gap: var(--space-sm);
+  }
+
+  .category__name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+</style>

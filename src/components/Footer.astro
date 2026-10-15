@@ -1,0 +1,55 @@
+---
+import { site } from '../data/site';
+
+// Evaluated at build time, so it updates on every deploy
+const year = new Date().getFullYear();
+---
+
+<footer class="footer is-dark">
+  <div class="container footer__inner">
+    <p>© {year} {site.name}</p>
+
+    <ul class="footer__links" aria-label="Social links">
+      <li><a href={site.github}>GitHub</a></li>
+      <li><a href={site.linkedin}>LinkedIn</a></li>
+      <li><a href={`mailto:${site.email}`}>Email</a></li>
+    </ul>
+
+    <a class="footer__top" href="/#home">Back to top</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--space-lg);
+    background: var(--color-navy);
+    color: var(--color-text-on-dark-muted);
+    font-size: 0.9375rem;
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm) var(--space-md);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer a {
+    text-underline-offset: 0.25em;
+    transition: color var(--transition);
+  }
+
+  .footer a:hover {
+    color: var(--color-white);
+  }
+</style>

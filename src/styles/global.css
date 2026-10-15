@@ -85,6 +85,11 @@ svg {
   padding-block: var(--space-section);
 }
 
+/* Thin line between consecutive light sections */
+.section--divided {
+  border-top: 1px solid var(--color-border);
+}
+
 .section-label {
   font-family: var(--font-mono);
   font-size: var(--text-label);

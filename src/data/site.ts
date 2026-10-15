@@ -3,14 +3,10 @@ export const site = {
   role: 'Software Engineer',
   description:
     'Jazer Torres is a Software Engineer focused on Java backend, Spring Boot and distributed systems.',
-
-  // Actualizar datos
   email: 'eryjazer@gmail.com',
-  github: '#',
-  linkedin: '#',
-
-  // Actualizar al tener ruta completa
-  resume: '#',
+  github: 'https://github.com/elMushu',
+  linkedin: 'https://www.linkedin.com/in/eryjazer/',
+  resume: '/resume/CV.pdf',
 } as const;
 
 export const navLinks = [
@@ -19,6 +15,5 @@ export const navLinks = [
   { href: '/#experience', label: 'Experience' },
   { href: '/#projects', label: 'Projects' },
   { href: '/#skills', label: 'Skills' },
-  { href: '/#resume', label: 'Resume' },
   { href: '/#contact', label: 'Contact' },
 ] as const;

@@ -1,0 +1,101 @@
+---
+import { site } from '../data/site';
+
+// Shows "linkedin.com/in/eryjazer" instead of the full URL
+const readable = (url: string) =>
+  url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+const channels = [
+  { label: 'Email', value: site.email, href: `mailto:${site.email}` },
+  { label: 'LinkedIn', value: readable(site.linkedin), href: site.linkedin },
+  { label: 'GitHub', value: readable(site.github), href: site.github },
+  { label: 'Resume', value: 'Download PDF', href: site.resume },
+];
+---
+
+<section
+  id="contact"
+  class="section section--divided"
+  aria-labelledby="contact-title"
+>
+  <div class="container contact__grid">
+    <div>
+      <p class="section-label" aria-hidden="true">05</p>
+      <h2 id="contact-title" class="section-title">Contact</h2>
+      <p class="contact__text">
+        I'm open to software engineering opportunities, backend development
+        roles and interesting technical conversations.
+      </p>
+    </div>
+
+    <ul class="channels">
+      {
+        channels.map((channel) => (
+          <li>
+            <a class="channel" href={channel.href}>
+              <span class="channel__label">{channel.label}</span>
+              <span class="channel__value">{channel.value}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contact__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .contact__grid {
+      grid-template-columns: 3fr 2fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+  }
+
+  .contact__text {
+    max-width: 36rem;
+    margin-top: var(--space-sm);
+  }
+
+  .channels {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .channel {
+    display: grid;
+    gap: 0.15rem;
+    padding: var(--space-sm) 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    text-decoration: none;
+    transition: border-color var(--transition);
+  }
+
+  .channel:hover {
+    border-color: var(--color-navy);
+  }
+
+  .channel__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .channel__value {
+    font-weight: 600;
+    color: var(--color-navy);
+    overflow-wrap: anywhere;
+  }
+</style>

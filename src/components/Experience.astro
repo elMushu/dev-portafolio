@@ -11,13 +11,11 @@ const items = jobs.map((job) => ({
     number: String(++counter).padStart(2, '0'),
   })),
 }));
-
-const isPlaceholder = (text: string) => text.startsWith('TODO');
 ---
 
 <section
   id="experience"
-  class="section experience"
+  class="section section--divided"
   aria-labelledby="experience-title"
 >
   <div class="container">
@@ -33,15 +31,19 @@ const isPlaceholder = (text: string) => text.startsWith('TODO');
           <li class="job">
             <div class="job__info">
               <h3 class="job__company">{job.company}</h3>
-              <p class:list={['job__role', { placeholder: isPlaceholder(job.role) }]}>
-                {job.role}
-              </p>
-              <p class:list={['job__period', { placeholder: isPlaceholder(job.period) }]}>
-                {job.period}
-              </p>
-              <p class:list={{ placeholder: isPlaceholder(job.summary) }}>
-                {job.summary}
-              </p>
+              <p class="job__location">{job.location}</p>
+
+              <ul class="job__positions">
+                {job.positions.map((position) => (
+                  <li>
+                    <span class="job__title">{position.title}</span>
+                    <span class="job__period">{position.period}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {job.summary && <p>{job.summary}</p>}
+
               {job.technologies && (
                 <ul class="tag-list" aria-label="Technologies and tools">
                   {job.technologies.map((tech) => (
@@ -51,16 +53,21 @@ const isPlaceholder = (text: string) => text.startsWith('TODO');
               )}
             </div>
 
-            <div class="job__studies">
-              {job.studies.length > 0 ? (
-                job.studies.map(({ study, number }) => (
-                  <ExperienceCard study={study} number={number} />
-                ))
-              ) : (
-                <p class="job__empty">
-                  Case studies pending: experience details need to be verified.
-                </p>
+            <div class="job__details">
+              {job.highlights && (
+                <div class="highlights">
+                  <p class="highlights__label">Highlights</p>
+                  <ul class="highlights__list">
+                    {job.highlights.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
+
+              {job.studies.map(({ study, number }) => (
+                <ExperienceCard study={study} number={number} />
+              ))}
             </div>
           </li>
         ))
@@ -70,10 +77,6 @@ const isPlaceholder = (text: string) => text.startsWith('TODO');
 </section>
 
 <style>
-  .experience {
-    border-top: 1px solid var(--color-border);
-  }
-
   .experience__intro {
     max-width: 40rem;
     margin-top: var(--space-sm);
@@ -105,7 +108,7 @@ const isPlaceholder = (text: string) => text.startsWith('TODO');
       align-items: start;
     }
 
-    /* Company info stays in view while its case studies scroll */
+    /* Company info stays in view while its details scroll */
     .job__info {
       position: sticky;
       top: calc(var(--header-height) + var(--space-md));
@@ -125,7 +128,24 @@ const isPlaceholder = (text: string) => text.startsWith('TODO');
     color: var(--color-navy);
   }
 
-  .job__role {
+  .job__location {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .job__positions {
+    display: grid;
+    gap: var(--space-xs);
+    margin: var(--space-xs) 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .job__positions li {
+    display: grid;
+  }
+
+  .job__title {
     font-weight: 600;
   }
 
@@ -135,20 +155,40 @@ const isPlaceholder = (text: string) => text.startsWith('TODO');
     color: var(--color-text-muted);
   }
 
-  .job__studies {
+  .job__details {
     display: grid;
     gap: var(--space-md);
   }
 
-  .job__empty {
-    padding: var(--space-md);
-    border: 1px dashed var(--color-border);
-    border-radius: var(--radius-md);
+  .highlights__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-text-muted);
   }
 
-  .placeholder {
-    font-style: italic;
-    color: var(--color-text-muted);
+  .highlights__list {
+    display: grid;
+    gap: 0.75rem;
+    margin: var(--space-sm) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Same small green square marker as "Beyond Code" */
+  .highlights__list li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .highlights__list li::before {
+    content: '';
+    position: absolute;
+    top: 0.6em;
+    left: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-green);
   }
 </style>
