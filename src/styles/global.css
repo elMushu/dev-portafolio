@@ -1,0 +1,193 @@
+/* Global styles: minimal reset, base elements and the few classes shared by several components. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Anchor links must not land underneath the sticky header */
+  scroll-padding-top: calc(var(--header-height) + var(--space-sm));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: var(--leading-tight);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 3px;
+}
+
+/* Sections with a navy background (header, hero) need a visible focus ring too */
+.is-dark {
+  --focus-color: var(--color-green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Layout helpers */
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container-width));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.section-title {
+  font-size: var(--text-section-title);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+
+/* Technology / topic tags on light backgrounds */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--color-text);
+}
+
+/* Text for screen readers only */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Buttons. Primary = green accent, outline = inherits the surrounding text color. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+.button--primary {
+  background: var(--color-green);
+  color: var(--color-navy);
+}
+
+.button--primary:hover {
+  background: var(--color-green-hover);
+}
+
+.button--outline {
+  color: inherit;
+  border-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.button--outline:hover {
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+/* Accessibility: lets keyboard users jump past the header */
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: var(--space-sm);
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-green);
+  color: var(--color-navy);
+  font-weight: 600;
+  transition: top var(--transition);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}

@@ -1,0 +1,58 @@
+/* Design tokens. Every color, font, size and spacing used by the site lives here. */
+:root {
+  /* Color: brand palette */
+  --color-navy: #0b1f33;
+  --color-navy-light: #132a44;
+  --color-white: #ffffff;
+  --color-background: #f7f9fc;
+  --color-green: #b7d83d;
+  --color-green-hover: #97b82f;
+  --color-text: #17202a;
+  --color-text-muted: #687383;
+  --color-border: #dce3ea;
+
+  /* Muted text for navy backgrounds (--color-text-muted lacks contrast there) */
+  --color-text-on-dark-muted: #aebbca;
+  --color-border-on-dark: rgb(255 255 255 / 0.18);
+
+  /* Focus ring color. Dark sections override it with green. */
+  --focus-color: var(--color-navy);
+
+  /* Typography: families */
+  --font-sans:
+    'Manrope Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:
+    'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  /* Typography: fluid sizes (min at ~400px viewport, max at large desktop) */
+  --text-hero: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem); /* 40px to 72px */
+  --text-section-title: clamp(1.875rem, 1.35rem + 1.7vw, 3rem); /* 30px to 48px */
+  --text-case-title: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); /* 24px to 32px */
+  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* 16px to 18px */
+  --text-label: 0.8125rem; /* 13px, JetBrains Mono */
+
+  --leading-tight: 1.1;
+  --leading-body: 1.65;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-section: clamp(4rem, 2.5rem + 5vw, 7rem);
+
+  /* Layout */
+  --container-width: 72rem;
+  --gutter: clamp(1.25rem, 4vw, 2rem);
+  --header-height: 4rem;
+
+  /* Shape and depth */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --shadow-card: 0 1px 2px rgb(11 31 51 / 0.06), 0 8px 24px rgb(11 31 51 / 0.08);
+
+  /* Motion */
+  --transition: 150ms ease;
+}

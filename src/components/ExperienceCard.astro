@@ -1,0 +1,149 @@
+---
+import type { CaseStudy } from '../data/experience';
+
+interface Props {
+  study: CaseStudy;
+  number: string;
+}
+
+const { study, number } = Astro.props;
+---
+
+<article class="card">
+  <div class="card__meta">
+    <p class="card__id">Case Study {number}</p>
+    {!study.validated && <p class="badge">Pending validation</p>}
+  </div>
+
+  <h4 class="card__title">{study.title}</h4>
+  <p>{study.summary}</p>
+
+  {
+    study.metric && (
+      <div class="metric">
+        <p class="metric__values">
+          <span>{study.metric.from}</span>
+          <span aria-hidden="true">→</span>
+          <span class="visually-hidden">to</span>
+          <span class="metric__to">{study.metric.to}</span>
+        </p>
+        {study.metric.reduction && (
+          <p class="metric__note">{study.metric.reduction}</p>
+        )}
+        {!study.metric.confirmed && (
+          <p class="metric__note metric__note--pending">
+            Metric pending confirmation
+          </p>
+        )}
+      </div>
+    )
+  }
+
+  <ul class="tag-list" aria-label="Technologies and topics">
+    {study.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+
+  {
+    study.generalized && (
+      <p class="card__note">
+        This case study has been generalized to protect confidential and
+        proprietary information.
+      </p>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+  }
+
+  @media (min-width: 40rem) {
+    .card {
+      padding: var(--space-lg);
+    }
+  }
+
+  .card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+  }
+
+  .card__id {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .badge {
+    padding: 0.15rem 0.5rem;
+    border: 1px dashed var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-text-muted);
+  }
+
+  .card__title {
+    margin: 0;
+    font-size: var(--text-case-title);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.01em;
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+
+  /* Before → after visual. Navy block so the green value stays readable. */
+  .metric {
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .metric__values {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+  }
+
+  .metric__to {
+    color: var(--color-green);
+  }
+
+  .metric__note {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-text-on-dark-muted);
+  }
+
+  .metric__note--pending {
+    justify-self: start;
+    padding: 0.15rem 0.5rem;
+    border: 1px dashed var(--color-text-on-dark-muted);
+    border-radius: var(--radius-sm);
+  }
+
+  .card__note {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+</style>

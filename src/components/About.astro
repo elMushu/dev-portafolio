@@ -1,0 +1,87 @@
+---
+// TODO: review copy. Draft limited to what is already known about the profile; rewrite in your own voice.
+const paragraphs = [
+  "I'm a Software Engineer focused on backend development with Java and Spring Boot. My work centers on microservices, and I care about the technical decisions behind the code as much as the code itself.",
+  "I'm always learning, and I'm increasingly interested in distributed systems and software architecture.",
+];
+
+const hobbies = ['Tennis', 'Gym', 'Reading', 'Movies'];
+---
+
+<section id="about" class="section" aria-labelledby="about-title">
+  <div class="container">
+    <p class="section-label" aria-hidden="true">01</p>
+    <h2 id="about-title" class="section-title">About</h2>
+
+    <div class="about__grid">
+      <div class="about__text">
+        {paragraphs.map((text) => <p>{text}</p>)}
+      </div>
+
+      <aside class="beyond" aria-labelledby="beyond-title">
+        <h3 id="beyond-title" class="beyond__title">Beyond Code</h3>
+        <ul class="beyond__list">
+          {hobbies.map((hobby) => <li>{hobby}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .about__grid {
+      grid-template-columns: 3fr 2fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+  }
+
+  .about__text {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 40rem;
+  }
+
+  .beyond {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+  }
+
+  .beyond__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .beyond__list {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: var(--space-sm);
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Small green square as a list marker: the only accent in this section */
+  .beyond__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .beyond__list li::before {
+    content: '';
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-green);
+  }
+</style>

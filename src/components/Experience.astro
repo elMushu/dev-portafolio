@@ -1,0 +1,154 @@
+---
+import ExperienceCard from './ExperienceCard.astro';
+import { jobs } from '../data/experience';
+
+// Case studies are numbered across the whole section (01, 02, 03...) so each identifier is unique
+let counter = 0;
+const items = jobs.map((job) => ({
+  ...job,
+  studies: job.caseStudies.map((study) => ({
+    study,
+    number: String(++counter).padStart(2, '0'),
+  })),
+}));
+
+const isPlaceholder = (text: string) => text.startsWith('TODO');
+---
+
+<section
+  id="experience"
+  class="section experience"
+  aria-labelledby="experience-title"
+>
+  <div class="container">
+    <p class="section-label" aria-hidden="true">02</p>
+    <h2 id="experience-title" class="section-title">Experience</h2>
+    <p class="experience__intro">
+      Professional work, most recent first, with selected case studies.
+    </p>
+
+    <ol class="jobs">
+      {
+        items.map((job) => (
+          <li class="job">
+            <div class="job__info">
+              <h3 class="job__company">{job.company}</h3>
+              <p class:list={['job__role', { placeholder: isPlaceholder(job.role) }]}>
+                {job.role}
+              </p>
+              <p class:list={['job__period', { placeholder: isPlaceholder(job.period) }]}>
+                {job.period}
+              </p>
+              <p class:list={{ placeholder: isPlaceholder(job.summary) }}>
+                {job.summary}
+              </p>
+              {job.technologies && (
+                <ul class="tag-list" aria-label="Technologies and tools">
+                  {job.technologies.map((tech) => (
+                    <li class="tag">{tech}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div class="job__studies">
+              {job.studies.length > 0 ? (
+                job.studies.map(({ study, number }) => (
+                  <ExperienceCard study={study} number={number} />
+                ))
+              ) : (
+                <p class="job__empty">
+                  Case studies pending: experience details need to be verified.
+                </p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .experience {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .experience__intro {
+    max-width: 40rem;
+    margin-top: var(--space-sm);
+    color: var(--color-text-muted);
+  }
+
+  .jobs {
+    display: grid;
+    gap: var(--space-xl);
+    margin: var(--space-xl) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .job {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .job + .job {
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 56rem) {
+    .job {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* Company info stays in view while its case studies scroll */
+    .job__info {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-md));
+    }
+  }
+
+  .job__info {
+    display: grid;
+    gap: var(--space-xs);
+    justify-items: start;
+  }
+
+  .job__company {
+    font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-navy);
+  }
+
+  .job__role {
+    font-weight: 600;
+  }
+
+  .job__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-text-muted);
+  }
+
+  .job__studies {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .job__empty {
+    padding: var(--space-md);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+  }
+
+  .placeholder {
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+</style>

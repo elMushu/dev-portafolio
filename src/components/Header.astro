@@ -1,0 +1,158 @@
+---
+import { site, navLinks } from '../data/site';
+---
+
+<header class="site-header is-dark">
+  <div class="container site-header__inner">
+    <a class="brand" href="/#home">{site.name}</a>
+
+    {/* Hidden until the script below runs, so the nav still works without JavaScript */}
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+    >
+      Menu
+    </button>
+
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--color-navy);
+    color: var(--color-white);
+    border-bottom: 1px solid var(--color-border-on-dark);
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--space-md);
+    min-height: var(--header-height);
+  }
+
+  .brand {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav a {
+    display: inline-block;
+    padding-block: var(--space-xs);
+    color: var(--color-text-on-dark-muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .nav a:hover {
+    color: var(--color-white);
+  }
+
+  .nav-toggle {
+    display: none;
+    min-height: 2.75rem;
+    padding: 0 var(--space-sm);
+    border: 1px solid var(--color-border-on-dark);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color var(--transition);
+  }
+
+  .nav-toggle:hover {
+    border-color: var(--color-white);
+  }
+
+  /* Collapsible menu below the desktop breakpoint, only once JS has enhanced the header */
+  @media (max-width: 55.99rem) {
+    .site-header[data-enhanced] .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .site-header[data-enhanced] .nav {
+      display: none;
+      flex-basis: 100%;
+      padding-bottom: var(--space-sm);
+    }
+
+    .site-header[data-enhanced][data-open] .nav {
+      display: block;
+    }
+
+    .site-header[data-enhanced] .nav__list {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = header?.querySelector<HTMLElement>('.nav');
+
+  if (header && toggle && nav) {
+    header.setAttribute('data-enhanced', '');
+
+    const setOpen = (open: boolean) => {
+      header.toggleAttribute('data-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Close' : 'Menu';
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Close after choosing a link
+    nav.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.hasAttribute('data-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Reset when the viewport grows to the desktop layout
+    window
+      .matchMedia('(min-width: 56rem)')
+      .addEventListener('change', () => setOpen(false));
+  }
+</script>
