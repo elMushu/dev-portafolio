@@ -62,7 +62,7 @@ export const jobs: Job[] = [
       { title: 'Backend Developer Intern', period: 'Jan 2024 – Nov 2024' },
     ],
     summary:
-      'I joined as a Backend Developer Intern and grew into a Backend Developer Jr role, working on Java and Spring Boot microservices in a banking technology environment and taking on more autonomy and responsibility along the way.',
+      'Backend engineering on Java and Spring Boot microservices in a banking technology environment, growing from Backend Developer Intern to Backend Developer Jr with increasing autonomy and responsibility.',
     technologies: [
       'Java 11',
       'Spring Boot',
@@ -87,25 +87,25 @@ export const jobs: Job[] = [
       {
         theme: 'Microservices development',
         items: [
-          'Took part in the development, maintenance and evolution of more than 10 microservices, REST APIs and backend components with Java 11, Spring Boot, Spring Data JPA and Hibernate / JPA. The work covered business logic, persistence, validation, exception handling and scheduled processes, using PostgreSQL, Sybase and Redis.',
+          'Contributed to the development, maintenance and evolution of more than 10 microservices, REST APIs and backend components with Java 11, Spring Boot, Spring Data JPA and Hibernate / JPA. The work covered business logic, persistence, validation, exception handling and scheduled processes, using PostgreSQL, Sybase and Redis.',
         ],
       },
       {
         theme: 'Authentication modernization',
         items: [
-          'Participated in refactoring an authentication flow after a legacy user type was removed. The change reached business logic, REST endpoints, persistence, database interactions and error handling across multiple microservices, and the existing scenarios for the different customer types had to keep working.',
+          'Part of the effort to refactor an authentication flow after a legacy user type was removed. The change reached business logic, REST endpoints, persistence, database interactions and error handling across multiple microservices, and the existing scenarios for the different customer types had to keep working.',
         ],
       },
       {
         theme: 'Testing and software quality',
         items: [
-          'Wrote unit tests with JUnit and Mockito and took part in integration and regression testing, including testing matrices. Debugged issues across microservice and database layers and addressed quality and security findings from SonarQube and Checkmarx.',
+          'Unit testing with JUnit and Mockito, plus integration and regression testing that included testing matrices. Issues were debugged across microservice and database layers, and quality and security findings from SonarQube and Checkmarx were addressed.',
         ],
       },
       {
         theme: 'Production support and collaboration',
         items: [
-          'Debugging, troubleshooting and production support were part of the role, together with collaboration with other teams. I took part in code reviews, estimation, refinement, planning, daily meetings, retrospectives, demos and releases while the team grew from approximately 10 to 15 people.',
+          'Debugging, troubleshooting and production support were part of the role, together with collaboration with other teams and participation in code reviews, estimation, refinement, planning, daily meetings, retrospectives, demos and releases, while the team grew from approximately 10 to 15 people.',
         ],
       },
     ],
@@ -167,7 +167,7 @@ export const jobs: Job[] = [
       },
     ],
     growth:
-      'I started as an intern and progressively gained autonomy and responsibility until I became a Backend Developer Jr. Along the way I developed ownership, troubleshooting, technical communication and cross-functional collaboration, and deepened my experience in backend development and process automation.',
+      'Moving from intern to Backend Developer Jr meant gradually taking on more autonomy and responsibility. Ownership, troubleshooting, technical communication and cross-functional collaboration developed along the way, together with deeper experience in backend development and process automation.',
   },
   {
     company: 'OneCard',
@@ -177,7 +177,7 @@ export const jobs: Job[] = [
       { title: 'Front-End Developer Intern', period: 'Jan 2022 – Jul 2023' },
     ],
     summary:
-      'A part-time internship of approximately 1 year and 7 months, done while I was studying. I took part in approximately 5 internal projects and functionalities, getting hands-on experience with REST API integration, SQL Server and Front-End development in a financial technology environment.',
+      'A part-time internship of approximately 1 year and 7 months, done alongside my studies. It spanned approximately 5 internal projects and functionalities, with hands-on work in REST API integration, SQL Server and Front-End development in a financial technology environment.',
     technologies: [
       'REST APIs',
       'JSON',
@@ -197,7 +197,7 @@ export const jobs: Job[] = [
       {
         theme: 'REST API integration',
         items: [
-          'Consumed and integrated REST APIs, working with endpoints, parameters, payloads, JSON, HTTP status codes, and response and error handling. I coordinated directly with a Backend Developer on these integrations.',
+          'Consumed and integrated REST APIs, working with endpoints, parameters, payloads, JSON, HTTP status codes, and response and error handling. Integrations were coordinated directly with a Backend Developer.',
         ],
       },
       {
@@ -217,7 +217,7 @@ export const jobs: Job[] = [
       {
         title: 'Transaction Monitoring Application',
         summary:
-          'An internal production application used for near-real-time monitoring of OneCard product transactions. I worked on its Front-End.',
+          'An internal production application used for near-real-time monitoring of OneCard product transactions. My part was its Front-End.',
         contribution: [
           'Built 4 Chart.js visualizations showing information such as successful transactions, failed transactions, transaction volume and recent transaction activity. The monitor displayed approximately 3 hours of transaction history.',
           'Integrated the application with REST APIs and SQL Server.',
@@ -229,11 +229,12 @@ export const jobs: Job[] = [
       },
     ],
     growth:
-      'This stage gave me practical exposure to financial systems, REST API integration, SQL, transaction monitoring and the collaboration between Front-End and Backend teams.',
+      'Practical exposure to financial systems, REST API integration, SQL, transaction monitoring and the collaboration between Front-End and Backend teams.',
   },
   {
     company: 'Universidad de Montemorelos',
     location: 'Montemorelos, Nuevo León, Mexico',
+    industry: 'Enterprise / Academic Systems',
     positions: [
       {
         title: 'Software Developer Intern (Part-Time)',
@@ -241,7 +242,7 @@ export const jobs: Job[] = [
       },
     ],
     summary:
-      'Part-time role supporting systems used by university staff and academic operations.',
+      'The first professional software development experience: a part-time internship of approximately 2 years and 5 months, spanning approximately 3 internal systems and 20+ features and tasks.',
     technologies: [
       'Java 11',
       'Spring Boot',
@@ -260,10 +261,26 @@ export const jobs: Job[] = [
     ],
     highlights: [
       {
-        theme: 'Internal applications',
-        items: ['Contributed to ~3 internal applications and 20+ features.'],
+        theme: 'Systems',
+        items: [
+          "The main contribution was to the university's Academic System, used daily by students, professors, employees and administrative departments. Work also reached the Asset Management System and approximately one additional institutional system.",
+        ],
+      },
+      {
+        theme: 'Backend and frontend development',
+        items: [
+          'Work in a monolithic MVC architecture covering business logic, validation, repositories, entities, exception handling, document generation and maintenance of existing applications, together with the development and redesign of administrative screens, forms, UI components and asynchronous interactions.',
+        ],
+      },
+      {
+        theme: 'Requirements and collaboration',
+        items: [
+          'Meetings with Finance and other areas to understand business needs, then working with the development team to translate them into functional and technical changes, in a team of approximately 6 people that included developers, interns and a team lead.',
+        ],
       },
     ],
     caseStudies: [],
+    growth:
+      'The work moved from highly guided tasks toward more complex requirements and greater participation in evaluating solutions. This stage set the professional foundations in Java, Spring, databases, persistence and Full Stack development, and it is where the interest in specializing in Backend Engineering began.',
   },
 ];

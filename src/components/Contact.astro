@@ -18,22 +18,21 @@ const channels = [
   class="section section--divided"
   aria-labelledby="contact-title"
 >
-  <div class="container contact__grid">
-    <div>
-      <p class="section-label" aria-hidden="true">05</p>
-      <h2 id="contact-title" class="section-title">Contact</h2>
-      <p class="contact__text">
-        I'm open to software engineering opportunities, backend development
-        roles and interesting technical conversations.
-      </p>
-    </div>
+  <div class="container">
+    <p class="section-label" aria-hidden="true">05</p>
+    <h2 id="contact-title" class="section-title">Contact</h2>
+    <p class="contact__text">
+      I'm open to software engineering opportunities, backend development roles
+      and interesting technical conversations.
+    </p>
 
+    {/* One panel with four cells: the 1px gaps show the border color between them */}
     <ul class="channels">
       {
         channels.map((channel) => (
           <li>
             <a class="channel" href={channel.href}>
-              <span class="channel__label">{channel.label}</span>
+              <span class="mono-label">{channel.label}</span>
               <span class="channel__value">{channel.value}</span>
             </a>
           </li>
@@ -44,58 +43,67 @@ const channels = [
 </section>
 
 <style>
-  .contact__grid {
-    display: grid;
-    gap: var(--space-lg);
-  }
-
-  @media (min-width: 48rem) {
-    .contact__grid {
-      grid-template-columns: 3fr 2fr;
-      gap: var(--space-xl);
-      align-items: start;
-    }
-  }
-
   .contact__text {
-    max-width: 36rem;
+    max-width: 40rem;
     margin-top: var(--space-sm);
   }
 
   .channels {
     display: grid;
-    gap: 0.75rem;
-    margin: 0;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    margin: var(--space-lg) 0 0;
     padding: 0;
     list-style: none;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-border);
+  }
+
+  /* Exactly 4 channels: 1 column, then 2x2, then a single row of 4 */
+  @media (min-width: 40rem) {
+    .channels {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .channels {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .channel {
     display: grid;
-    gap: 0.15rem;
-    padding: var(--space-sm) 1.25rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    align-content: space-between;
+    gap: var(--space-xs);
+    height: 100%;
+    padding: var(--space-md);
     background: var(--color-white);
     text-decoration: none;
-    transition: border-color var(--transition);
+    transition: background-color var(--transition);
   }
 
   .channel:hover {
-    border-color: var(--color-navy);
+    background: var(--color-background);
   }
 
-  .channel__label {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
+  .channel:hover .channel__value {
+    text-decoration: underline;
+    text-decoration-color: var(--color-green-hover);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
   }
 
   .channel__value {
     font-weight: 600;
     color: var(--color-navy);
     overflow-wrap: anywhere;
+  }
+
+  /* Keep the focus ring inside the panel, where overflow:hidden would clip it */
+  .channel:focus-visible {
+    outline-offset: -3px;
   }
 </style>

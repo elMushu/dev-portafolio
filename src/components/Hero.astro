@@ -5,7 +5,7 @@ import { site } from '../data/site';
 const intro =
   'I build backend services with Java and Spring Boot, with experience in microservices, REST APIs and process automation in the financial sector.';
 
-const focusAreas = ['Java Backend', 'Spring Boot', 'Microservices'];
+const focusAreas = ['Java', 'Spring Boot', 'Microservices'];
 ---
 
 <section id="home" class="hero is-dark" aria-labelledby="hero-title">
@@ -22,9 +22,7 @@ const focusAreas = ['Java Backend', 'Spring Boot', 'Microservices'];
       <p class="hero__intro">{intro}</p>
 
       <div class="hero__actions">
-        <a class="button button--primary" href="/#experience">View Experience</a>
-        <a class="button button--outline" href="/#projects">View Projects</a>
-        <a class="button button--outline" href={site.resume} download>
+        <a class="button button--primary" href={site.resume} download>
           Download CV
         </a>
       </div>
