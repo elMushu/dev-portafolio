@@ -1,14 +1,48 @@
 ---
 import { site } from '../data/site';
+import Icon from './Icon.astro';
 
-// TODO: review copy. This draft only restates the profile; rewrite it in your own voice.
 const intro =
-  'I build backend services with Java and Spring Boot, with experience in microservices, REST APIs and process automation in the financial sector.';
+  'Nearly 3 years building Java and Spring Boot microservices in banking technology, with a focus on process automation, software quality and maintainable code.';
 
 const focusAreas = ['Java', 'Spring Boot', 'Microservices'];
+
+const links = [
+  { label: 'GitHub', icon: 'github', href: site.github },
+  { label: 'LinkedIn', icon: 'linkedin', href: site.linkedin },
+  { label: 'Email', icon: 'email', href: `mailto:${site.email}` },
+] as const;
+
+// Tennis court seen from above (real proportions: 78 x 36 units). Drawn as thin lines.
+const courtLines = [
+  [0, 45, 780, 45],
+  [0, 315, 780, 315],
+  [390, 0, 390, 360],
+  [180, 45, 180, 315],
+  [600, 45, 600, 315],
+  [180, 180, 600, 180],
+];
 ---
 
 <section id="home" class="hero is-dark" aria-labelledby="hero-title">
+  {/* Decorative: faint white court lines that draw themselves once on load */}
+  <svg class="court" viewBox="0 0 780 360" aria-hidden="true" focusable="false">
+    <rect class="court__line" style="--i: 0" x="0" y="0" width="780" height="360" pathLength="1"></rect>
+    {
+      courtLines.map(([x1, y1, x2, y2], index) => (
+        <line
+          class="court__line"
+          style={`--i: ${index + 1}`}
+          x1={x1}
+          y1={y1}
+          x2={x2}
+          y2={y2}
+          pathLength="1"
+        />
+      ))
+    }
+  </svg>
+
   <div class="container hero__grid">
     <div class="hero__content">
       <h1 id="hero-title" class="hero__title">{site.name}</h1>
@@ -24,13 +58,23 @@ const focusAreas = ['Java', 'Spring Boot', 'Microservices'];
       <div class="hero__actions">
         <a class="button button--primary" href={site.resume} download>
           Download CV
+          <span class="button__icon" aria-hidden="true">↓</span>
         </a>
       </div>
 
       <ul class="hero__links" aria-label="Contact links">
-        <li><a href={site.github}>GitHub</a></li>
-        <li><a href={site.linkedin}>LinkedIn</a></li>
-        <li><a href={`mailto:${site.email}`}>Email</a></li>
+        {
+          links.map((link) => (
+            <li>
+              <a class="button button--outline" href={link.href}>
+                <span class="hero__icon">
+                  <Icon name={link.icon} />
+                </span>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
@@ -46,12 +90,47 @@ const focusAreas = ['Java', 'Spring Boot', 'Microservices'];
 
 <style>
   .hero {
+    position: relative;
+    overflow: hidden; /* the court is bigger than the hero on purpose */
     padding-block: clamp(3rem, 2rem + 5vw, 6rem);
     background: var(--color-navy);
     color: var(--color-white);
   }
 
+  /* Court lines sit behind the content, anchored to the bottom right */
+  .court {
+    position: absolute;
+    right: -4rem;
+    bottom: -3rem;
+    width: min(62rem, 130%);
+    fill: none;
+    stroke: var(--color-white);
+    stroke-width: 2;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .court__line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .court__line {
+      stroke-dashoffset: 1;
+      animation: draw-line 2.2s ease-out forwards;
+      animation-delay: calc(var(--i) * 0.3s);
+    }
+  }
+
+  @keyframes draw-line {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
   .hero__grid {
+    position: relative; /* above the court */
     display: grid;
     gap: var(--space-xl);
     align-items: center;
@@ -114,23 +193,30 @@ const focusAreas = ['Java', 'Spring Boot', 'Microservices'];
     margin-top: var(--space-lg);
   }
 
+  /* Secondary buttons, in a row right under "Download CV" */
   .hero__links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-xs) var(--space-md);
-    margin-top: var(--space-lg);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
     padding: 0;
     list-style: none;
   }
 
-  .hero__links a {
-    color: var(--color-text-on-dark-muted);
-    text-underline-offset: 0.25em;
-    transition: color var(--transition);
+  .hero__links .button {
+    gap: 0.5rem;
   }
 
-  .hero__links a:hover {
-    color: var(--color-white);
+  /* Logos follow the button text color; they give a little hop on hover */
+  .hero__icon {
+    display: inline-flex;
+    transition: transform var(--transition);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__links a:hover .hero__icon {
+      transform: translateY(-3px) scale(1.15);
+    }
   }
 
   /* Portrait frame: white card with a green outline offset behind it */

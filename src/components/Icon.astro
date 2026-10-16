@@ -1,0 +1,23 @@
+---
+import { icons, type IconName } from '../data/icons';
+
+interface Props {
+  name: IconName;
+}
+
+const { name } = Astro.props;
+---
+
+<!-- Decorative: the text next to it carries the meaning, so screen readers skip it -->
+<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+  <path d={icons[name]}></path>
+</svg>
+
+<style>
+  svg {
+    display: block;
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import { skillCategories } from '../data/skills';
+import TechTag from './TechTag.astro';
 ---
 
 <section
@@ -18,7 +19,7 @@ import { skillCategories } from '../data/skills';
             <h3 class="category__name">{category.name}</h3>
             <ul class="tag-list">
               {category.items.map((item) => (
-                <li class="tag">{item}</li>
+                <TechTag label={item} />
               ))}
             </ul>
           </div>

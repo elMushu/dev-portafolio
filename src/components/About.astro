@@ -1,12 +1,17 @@
 ---
 // Source: CLAUDE.md (portfolio context) and resume (CV.pdf)
 const paragraphs = [
-  "Backend Software Engineer with nearly 3 years of professional experience building Java and Spring Boot services in the financial sector. At Banregio / Hey Banco, the work centered on microservices, REST APIs and internal automation tools, with a steady focus on testing, code quality and production support.",
-  "The path began in 2019 as a part-time developer intern at Universidad de Montemorelos, on Java and Spring systems that included the university's Academic System, used daily by students, professors and administrative staff. Backend engineering became the direction there. A Front-End internship at OneCard added hands-on experience with REST APIs, SQL and transaction monitoring in a fintech environment, before the move into backend engineering at Banregio / Hey Banco.",
-  "Maintainable, well-tested backend code matters to me, and so does understanding the reasons behind technical decisions. Next on the list: growing my knowledge of software architecture and taking on more ownership of end-to-end backend solutions.",
+  'Backend engineer working mostly with Java and Spring Boot. Nearly 3 years in banking technology made it clear how much of the job happens around the code: testing, debugging, production support and close work with other teams.',
+  "It started in 2019 with a part-time internship at Universidad de Montemorelos, on systems used every day by students, professors and administrative staff, and that is where backend work first caught my attention. A Front-End internship at OneCard followed, bringing REST APIs, SQL and transaction monitoring into the picture. Then came Banregio / Hey Banco, first as an intern and later as a Backend Developer Jr.",
+  "These days I care about code that is easy to maintain and well tested, and about knowing why a technical decision was made. Next, I'm looking to grow in software architecture and take on more ownership of end-to-end backend solutions.",
 ];
 
-const hobbies = ['Tennis', 'Gym', 'Reading', 'Movies'];
+const hobbies = [
+  { label: 'Tennis', emoji: '🎾' },
+  { label: 'Gym', emoji: '🏋️' },
+  { label: 'Reading', emoji: '📚' },
+  { label: 'F1', emoji: '🏎️' },
+];
 
 const facts = [
   {
@@ -47,10 +52,19 @@ const facts = [
           }
         </dl>
 
-        <aside class="beyond" aria-labelledby="beyond-title">
-          <h3 id="beyond-title" class="beyond__title">Beyond Code</h3>
-          <ul class="beyond__list">
-            {hobbies.map((hobby) => <li>{hobby}</li>)}
+        <aside class="hobbies" aria-labelledby="hobbies-title">
+          <h3 id="hobbies-title" class="hobbies__title">Hobbies</h3>
+          <ul class="hobbies__list">
+            {
+              hobbies.map((hobby) => (
+                <li>
+                  <span class="hobbies__emoji" aria-hidden="true">
+                    {hobby.emoji}
+                  </span>
+                  {hobby.label}
+                </li>
+              ))
+            }
           </ul>
         </aside>
       </div>
@@ -111,39 +125,43 @@ const facts = [
     margin: 0;
   }
 
-  .beyond {
+  .hobbies {
     padding: var(--space-md);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background: var(--color-white);
   }
 
-  .beyond__title {
+  .hobbies__title {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-navy);
   }
 
-  .beyond__list {
+  .hobbies__list {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     margin-top: var(--space-sm);
     padding: 0;
     list-style: none;
   }
 
-  /* Small green square as a list marker: the only accent in this section */
-  .beyond__list li {
+  .hobbies__list li {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.625rem;
   }
 
-  .beyond__list li::before {
-    content: '';
-    flex: none;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: var(--color-green);
+  /* Emoji bounces a little when its hobby is hovered */
+  .hobbies__emoji {
+    display: inline-block;
+    transition: transform var(--transition);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hobbies__list li:hover .hobbies__emoji {
+      transform: translateY(-3px) scale(1.2);
+    }
   }
 </style>

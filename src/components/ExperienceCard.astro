@@ -1,5 +1,6 @@
 ---
 import type { CaseStudy } from '../data/experience';
+import TechTag from './TechTag.astro';
 
 interface Props {
   study: CaseStudy;
@@ -62,7 +63,7 @@ const { study, number } = Astro.props;
   }
 
   <ul class="tag-list" aria-label="Technologies and topics">
-    {study.tags.map((tag) => <li class="tag">{tag}</li>)}
+    {study.tags.map((tag) => <TechTag label={tag} />)}
   </ul>
 
   {

@@ -41,6 +41,7 @@ export interface HighlightGroup {
 export interface Job {
   company: string;
   location: string;
+  workMode?: 'On-site' | 'Hybrid' | 'Remote';
   industry?: string;
   // Most recent first
   positions: Position[];
@@ -56,6 +57,7 @@ export const jobs: Job[] = [
   {
     company: 'Banregio / Hey Banco',
     location: 'Monterrey, Nuevo León, Mexico',
+    workMode: 'Remote',
     industry: 'Financial Services / Banking Technology',
     positions: [
       { title: 'Backend Developer Jr', period: 'Nov 2024 – Aug 2026' },
@@ -171,7 +173,8 @@ export const jobs: Job[] = [
   },
   {
     company: 'OneCard',
-    location: 'Mexico',
+    location: 'Montemorelos, Nuevo León, Mexico',
+    workMode: 'Hybrid',
     industry: 'Financial Technology / Prepaid Cards',
     positions: [
       { title: 'Front-End Developer Intern', period: 'Jan 2022 – Jul 2023' },
@@ -234,6 +237,7 @@ export const jobs: Job[] = [
   {
     company: 'Universidad de Montemorelos',
     location: 'Montemorelos, Nuevo León, Mexico',
+    workMode: 'On-site',
     industry: 'Enterprise / Academic Systems',
     positions: [
       {

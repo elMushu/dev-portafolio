@@ -1,16 +1,17 @@
 ---
 import { site } from '../data/site';
+import Icon from './Icon.astro';
 
 // Shows "linkedin.com/in/eryjazer" instead of the full URL
 const readable = (url: string) =>
   url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 
 const channels = [
-  { label: 'Email', value: site.email, href: `mailto:${site.email}` },
-  { label: 'LinkedIn', value: readable(site.linkedin), href: site.linkedin },
-  { label: 'GitHub', value: readable(site.github), href: site.github },
-  { label: 'Resume', value: 'Download PDF', href: site.resume },
-];
+  { label: 'Email', icon: 'email', value: site.email, href: `mailto:${site.email}` },
+  { label: 'LinkedIn', icon: 'linkedin', value: readable(site.linkedin), href: site.linkedin },
+  { label: 'GitHub', icon: 'github', value: readable(site.github), href: site.github },
+  { label: 'Resume', icon: 'resume', value: 'Download PDF', href: site.resume },
+] as const;
 ---
 
 <section
@@ -20,11 +21,7 @@ const channels = [
 >
   <div class="container">
     <p class="section-label" aria-hidden="true">04</p>
-    <h2 id="contact-title" class="section-title">Contact</h2>
-    <p class="contact__text">
-      I'm open to software engineering opportunities, backend development roles
-      and interesting technical conversations.
-    </p>
+    <h2 id="contact-title" class="section-title">Contact Me</h2>
 
     {/* One panel with four cells: the 1px gaps show the border color between them */}
     <ul class="channels">
@@ -32,8 +29,14 @@ const channels = [
         channels.map((channel) => (
           <li>
             <a class="channel" href={channel.href}>
-              <span class="mono-label">{channel.label}</span>
+              <span class="channel__head">
+                <span class="channel__icon">
+                  <Icon name={channel.icon} />
+                </span>
+                <span class="mono-label">{channel.label}</span>
+              </span>
               <span class="channel__value">{channel.value}</span>
+              <span class="channel__arrow" aria-hidden="true">↗</span>
             </a>
           </li>
         ))
@@ -43,11 +46,6 @@ const channels = [
 </section>
 
 <style>
-  .contact__text {
-    max-width: 40rem;
-    margin-top: var(--space-sm);
-  }
-
   .channels {
     display: grid;
     grid-template-columns: 1fr;
@@ -74,7 +72,27 @@ const channels = [
     }
   }
 
+  /* Arrow appears in the corner on hover or keyboard focus */
+  .channel__arrow {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-md);
+    color: var(--color-navy);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition:
+      opacity var(--transition),
+      transform var(--transition);
+  }
+
+  .channel:hover .channel__arrow,
+  .channel:focus-visible .channel__arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
   .channel {
+    position: relative;
     display: grid;
     align-content: space-between;
     gap: var(--space-xs);
@@ -94,6 +112,24 @@ const channels = [
     text-decoration-color: var(--color-green-hover);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.25em;
+  }
+
+  .channel__head {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .channel__icon {
+    display: inline-flex;
+    color: var(--color-navy);
+    transition: transform var(--transition);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .channel:hover .channel__icon {
+      transform: scale(1.15);
+    }
   }
 
   .channel__value {

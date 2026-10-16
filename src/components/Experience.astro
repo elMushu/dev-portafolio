@@ -1,5 +1,6 @@
 ---
 import ExperienceCard from './ExperienceCard.astro';
+import TechTag from './TechTag.astro';
 import { jobs } from '../data/experience';
 
 // Case studies are numbered across the whole section (01, 02, 03...) so each identifier is unique
@@ -32,6 +33,7 @@ const items = jobs.map((job) => ({
             <div class="job__info">
               <h3 class="job__company">{job.company}</h3>
               <p class="job__location">{job.location}</p>
+              {job.workMode && <p class="job__mode">{job.workMode}</p>}
               {job.industry && <p class="job__industry">{job.industry}</p>}
 
               <ul class="job__positions">
@@ -48,7 +50,7 @@ const items = jobs.map((job) => ({
               {job.technologies && (
                 <ul class="tag-list" aria-label="Technologies and tools">
                   {job.technologies.map((tech) => (
-                    <li class="tag">{tech}</li>
+                    <TechTag label={tech} />
                   ))}
                 </ul>
               )}
@@ -175,6 +177,15 @@ const items = jobs.map((job) => ({
   .job__details {
     display: grid;
     gap: var(--space-md);
+  }
+
+  .job__mode {
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
   }
 
   .job__industry {

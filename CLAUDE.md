@@ -35,6 +35,8 @@ Career context: the Universidad de Montemorelos and OneCard roles were student i
 
 Do not claim distributed-systems or distributed-architecture experience anywhere in the portfolio: the owner has not worked on it. It is a growth area only, so do not use it in the hero, tags, descriptions or skills. TypeScript is a real but not advanced skill: keep it listed without implying a high level.
 
+Work modes and locations: Universidad de Montemorelos was on-site in Montemorelos, Nuevo León, Mexico. OneCard was hybrid, in Montemorelos, Nuevo León, Mexico. Banregio / Hey Banco was remote, based in Monterrey, Nuevo León, Mexico. (The resume still says only "Mexico" for OneCard.)
+
 Professional focus: Backend Engineering, automation, maintainable systems, software quality, distributed systems and architecture growth.
 
 My backend specialization is mainly based on nearly 3 years of professional experience with Java and Spring Boot in the financial sector, supported by an earlier software development trajectory that began in 2019.

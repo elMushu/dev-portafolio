@@ -4,7 +4,15 @@ import { site, navLinks } from '../data/site';
 
 <header class="site-header is-dark">
   <div class="container site-header__inner">
-    <a class="brand" href="/#home">{site.name}</a>
+    {/* Looks like code. The visible mark is hidden from screen readers, which get the real name. */}
+    <a class="brand" href="/#home">
+      <span class="brand__mark" aria-hidden="true">
+        <span class="brand__bracket brand__bracket--open">&lt;</span>EJ<span
+          class="brand__bracket brand__bracket--close">&gt;</span
+        >
+      </span>
+      <span class="visually-hidden">{site.name}, home</span>
+    </a>
 
     {/* Hidden until the script below runs, so the nav still works without JavaScript */}
     <button
@@ -50,9 +58,31 @@ import { site, navLinks } from '../data/site';
   }
 
   .brand {
-    font-weight: 700;
-    letter-spacing: -0.01em;
     text-decoration: none;
+  }
+
+  .brand__mark {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .brand__bracket {
+    display: inline-block;
+    color: var(--color-green);
+    transition: transform var(--transition);
+  }
+
+  /* On hover the brackets open up a little */
+  .brand:hover .brand__bracket--open {
+    transform: translateX(-3px);
+  }
+
+  .brand:hover .brand__bracket--close {
+    transform: translateX(3px);
   }
 
   .nav__list {
@@ -71,11 +101,17 @@ import { site, navLinks } from '../data/site';
     font-size: 0.9375rem;
     font-weight: 500;
     text-decoration: none;
-    transition: color var(--transition);
+    /* Green underline that grows from the left on hover */
+    background: linear-gradient(var(--color-green), var(--color-green)) no-repeat
+      left bottom / 0 2px;
+    transition:
+      color var(--transition),
+      background-size var(--transition);
   }
 
   .nav a:hover {
     color: var(--color-white);
+    background-size: 100% 2px;
   }
 
   .nav-toggle {
