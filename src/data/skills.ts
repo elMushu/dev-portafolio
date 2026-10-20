@@ -1,4 +1,4 @@
-// Skills grouped by category. Sources: resume (CV.pdf) and CLAUDE.md (portfolio context).
+// Skills grouped by category. Sources: resume (CV_JazerTorres.pdf) and CLAUDE.md (portfolio context).
 // No percentages or levels on purpose: a plain list is more honest and easier to scan.
 // Order matters: backend-related categories come first because that is the target role.
 
@@ -53,7 +53,12 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     name: 'AI-Assisted Workflows',
-    items: ['Claude', 'Documentation automation', 'Multi-repository workflows'],
+    items: [
+      'Claude',
+      'Prompt design',
+      'Documentation automation',
+      'Multi-repository workflows',
+    ],
   },
   {
     name: 'Engineering Practices',
@@ -71,6 +76,7 @@ export const skillCategories: SkillCategory[] = [
   {
     name: 'Frontend & Reporting',
     items: [
+      'Angular',
       'HTML',
       'CSS',
       'AJAX',

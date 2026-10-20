@@ -23,7 +23,9 @@ const items = jobs.map((job) => ({
     <p class="section-label" aria-hidden="true">02</p>
     <h2 id="experience-title" class="section-title">Experience</h2>
     <p class="experience__intro">
-      Professional work, most recent first, with selected case studies.
+      Professional work, most recent first, with selected case studies. Case
+      study details have been generalized to protect confidential and
+      proprietary information.
     </p>
 
     <ol class="jobs">
@@ -93,7 +95,7 @@ const items = jobs.map((job) => ({
 
 <style>
   .experience__intro {
-    max-width: 40rem;
+    max-width: 44rem;
     margin-top: var(--space-sm);
     color: var(--color-text-muted);
   }
@@ -230,6 +232,7 @@ const items = jobs.map((job) => ({
   }
 
   .highlights__list dd {
+    max-width: 68ch; /* 60 to 75 characters per line reads comfortably */
     margin: 0;
     padding-left: 1.25rem;
   }

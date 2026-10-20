@@ -13,10 +13,8 @@ const icon = techIcons[label];
 <li class="tag tech-tag">
   {
     icon && (
-      <svg viewBox={icon.viewBox} fill="currentColor" aria-hidden="true" focusable="false">
-        {icon.paths.map((d) => (
-          <path d={d} />
-        ))}
+      <svg fill="currentColor" aria-hidden="true" focusable="false">
+        <use href={`#logo-${icon.id}`} />
       </svg>
     )
   }

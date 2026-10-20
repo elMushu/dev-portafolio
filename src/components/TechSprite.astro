@@ -1,0 +1,24 @@
+---
+import { uniqueLogos } from '../data/techIcons';
+---
+
+<!-- Every logo is defined here once. Chips reference them with <use>, so the page does not
+     repeat the same SVG path data for each chip. Zero size instead of display:none, which
+     can break SVG rendering in some browsers. -->
+<svg
+  width="0"
+  height="0"
+  style="position: absolute; overflow: hidden"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    uniqueLogos.map((logo) => (
+      <symbol id={`logo-${logo.id}`} viewBox={logo.viewBox}>
+        {logo.paths.map((d) => (
+          <path d={d} />
+        ))}
+      </symbol>
+    ))
+  }
+</svg>

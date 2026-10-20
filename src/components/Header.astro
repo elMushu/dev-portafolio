@@ -14,21 +14,17 @@ import { site, navLinks } from '../data/site';
       <span class="visually-hidden">{site.name}, home</span>
     </a>
 
-    {/* Both buttons stay hidden until the script below runs, so the page still works without JavaScript */}
-    <div class="header__actions">
-      <button class="theme-toggle" type="button" aria-label="Switch to light theme">
-        <span class="theme-toggle__icon" aria-hidden="true">☀️</span>
-      </button>
+    {/* Both buttons stay hidden until the script below runs, so the page still works without JavaScript.
+        DOM order matches the visual order, so Tab follows what you see. */}
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+    >
+      Menu
+    </button>
 
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="primary-nav"
-      >
-        Menu
-      </button>
-    </div>
 
     <nav id="primary-nav" class="nav" aria-label="Primary">
       <ul class="nav__list">
@@ -41,6 +37,10 @@ import { site, navLinks } from '../data/site';
         }
       </ul>
     </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme">
+      <span class="theme-toggle__icon" aria-hidden="true">☀️</span>
+    </button>
   </div>
 
   {/* Reading progress: a green line grows along the bottom of the header as you scroll,
@@ -136,21 +136,29 @@ import { site, navLinks } from '../data/site';
     background-size: 100% 2px;
   }
 
-  .header__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
+  /* Visual order. Mobile: brand, then Menu and the theme button on the right, nav list below.
+     Desktop: brand, nav, theme button. The DOM already follows this order. */
+  .brand {
+    order: 1;
   }
 
-  /* Desktop order: brand, nav, then the buttons on the far right */
+  .nav-toggle {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .theme-toggle {
+    order: 3;
+  }
+
+  .nav {
+    order: 4;
+  }
+
   @media (min-width: 56rem) {
     .nav {
       order: 2;
       margin-left: auto;
-    }
-
-    .header__actions {
-      order: 3;
     }
   }
 

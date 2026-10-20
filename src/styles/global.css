@@ -192,6 +192,12 @@ svg {
   }
 }
 
+/* Keeps a short phrase together on one line */
+
+.nowrap {
+  white-space: nowrap;
+}
+
 /* Text for screen readers only */
 
 .visually-hidden {

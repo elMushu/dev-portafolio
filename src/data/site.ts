@@ -1,13 +1,15 @@
 export const site = {
   name: 'Jazer Torres',
+  fullName: 'Ery Jazer Torres Ramos',
   role: 'Backend Software Engineer',
   description:
-    'Jazer Torres is a Backend Software Engineer focused on Java, Spring Boot and microservices.',
+    'Jazer Torres (Ery Jazer Torres Ramos) is a Backend Software Engineer focused on Java, Spring Boot and microservices, with nearly 3 years in banking technology.',
   location: 'Monterrey, Nuevo León, Mexico',
+  availability: 'Open to remote',
   email: 'eryjazer@gmail.com',
   github: 'https://github.com/elMushu',
   linkedin: 'https://www.linkedin.com/in/eryjazer/',
-  resume: '/resume/CV.pdf',
+  resume: '/resume/CV_JazerTorres.pdf',
 } as const;
 
 export const navLinks = [

@@ -49,7 +49,7 @@ const courtLines = [
     <div class="hero__content">
       <h1 id="hero-title" class="hero__title">{site.name}</h1>
       <p class="hero__role">{site.role}</p>
-      <p class="hero__location">{site.location}</p>
+      <p class="hero__location"><span class="nowrap">{site.location} ·</span> <span class="nowrap">{site.availability}</span></p>
 
       <ul class="hero__focus" aria-label="Professional focus">
         {focusAreas.map((area) => <li>{area}</li>)}
@@ -124,6 +124,8 @@ const courtLines = [
     stroke-width: 2;
     opacity: 0.12;
     pointer-events: none;
+    /* Fade toward the text so the lines never cross it */
+    mask-image: linear-gradient(to left, #000 30%, transparent 80%);
   }
 
   .court__line {
