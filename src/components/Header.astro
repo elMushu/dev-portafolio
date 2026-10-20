@@ -238,63 +238,41 @@ import { site, navLinks } from '../data/site';
     }
   }
 
-  /* Scroll progress. It needs scroll-driven animations (Chrome, Edge, recent Safari).
-     Where they are not supported, or motion is reduced, it is simply not shown. */
+  /* Scroll progress. A script writes --progress (0 to 1) as you scroll; the CSS turns it into the
+     green line and the rolling ball. Hidden until the script runs, and when motion is reduced.
+     (A CSS-only version with animation-timeline does not work in Firefox or older Safari, and the
+     build's CSS minifier also rewrites it into a shorthand Chrome rejects.) */
   .scroll-progress {
     display: none;
   }
 
-  @supports (animation-timeline: scroll()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .scroll-progress {
-        display: block;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -1px; /* sits on the header's bottom border */
-        height: 2px;
-        pointer-events: none;
-      }
-
-      .scroll-progress__line {
-        display: block;
-        height: 100%;
-        background: var(--color-green);
-        transform: scaleX(0);
-        transform-origin: left;
-        animation: progress-line linear both;
-        animation-timeline: scroll(root);
-      }
-
-      .scroll-progress__ball {
-        position: absolute;
-        top: 50%;
-        left: 0.5rem;
-        width: 1rem;
-        height: 1rem;
-        margin: -0.5rem 0 0 -0.5rem;
-        animation: progress-ball linear both;
-        animation-timeline: scroll(root);
-      }
-    }
+  .site-header[data-progress-ready] .scroll-progress {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px; /* sits on the header's bottom border */
+    height: 2px;
+    pointer-events: none;
   }
 
-  @keyframes progress-line {
-    to {
-      transform: scaleX(1);
-    }
+  .scroll-progress__line {
+    display: block;
+    height: 100%;
+    background: var(--color-green);
+    transform: scaleX(var(--progress, 0));
+    transform-origin: left;
   }
 
   /* Rolls from the left edge to the right edge, spinning as it goes */
-  @keyframes progress-ball {
-    from {
-      left: 0.5rem;
-      rotate: 0deg;
-    }
-    to {
-      left: calc(100% - 0.5rem);
-      rotate: 1440deg;
-    }
+  .scroll-progress__ball {
+    position: absolute;
+    top: 50%;
+    left: calc(0.5rem + var(--progress, 0) * (100% - 1rem));
+    width: 1rem;
+    height: 1rem;
+    margin: -0.5rem 0 0 -0.5rem;
+    rotate: calc(var(--progress, 0) * 1440deg);
   }
 </style>
 
@@ -303,6 +281,36 @@ import { site, navLinks } from '../data/site';
   const toggle = header?.querySelector<HTMLButtonElement>('.nav-toggle');
   const nav = header?.querySelector<HTMLElement>('.nav');
   const themeButton = header?.querySelector<HTMLButtonElement>('.theme-toggle');
+
+  // Scroll progress: sets --progress (0 at the top, 1 at the bottom) for the line and the ball
+  const progress = header?.querySelector<HTMLElement>('.scroll-progress');
+  if (
+    header &&
+    progress &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    header.setAttribute('data-progress-ready', '');
+    let waiting = false;
+
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      progress.style.setProperty('--progress', value.toFixed(4));
+      waiting = false;
+    };
+
+    // At most one update per frame
+    const onScroll = () => {
+      if (!waiting) {
+        waiting = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
 
   // Theme switch: dark is the default, light is remembered in localStorage
   if (header && themeButton) {
