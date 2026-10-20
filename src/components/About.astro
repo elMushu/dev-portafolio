@@ -34,11 +34,11 @@ const facts = [
     <h2 id="about-title" class="section-title">About</h2>
 
     <div class="about__grid">
-      <div class="about__text">
+      <div class="about__text reveal">
         {paragraphs.map((text) => <p>{text}</p>)}
       </div>
 
-      <div class="about__side">
+      <div class="about__side reveal">
         <dl class="facts">
           {
             facts.map((fact) => (
@@ -105,7 +105,7 @@ const facts = [
     padding: var(--space-md);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    background: var(--color-white);
+    background: var(--surface);
   }
 
   .facts__item {
@@ -129,13 +129,13 @@ const facts = [
     padding: var(--space-md);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    background: var(--color-white);
+    background: var(--surface);
   }
 
   .hobbies__title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-navy);
+    color: var(--color-heading);
   }
 
   .hobbies__list {

@@ -15,6 +15,15 @@
   --color-text-on-dark-muted: #aebbca;
   --color-border-on-dark: rgb(255 255 255 / 0.18);
 
+  /* Semantic roles: components use these, so a palette can restyle everything by changing tokens */
+  --color-heading: var(--color-navy);
+  --surface: var(--color-white); /* cards and panels */
+  --surface-hover: var(--color-background);
+  --tag-bg: var(--color-background);
+  --tag-hover-bg: var(--color-navy);
+  --tag-hover-text: var(--color-white);
+  --dark-divider: transparent; /* line between navy sections, only needed on the dark palette */
+
   /* Focus ring color. Dark sections override it with green. */
   --focus-color: var(--color-navy);
 
@@ -55,4 +64,23 @@
 
   /* Motion */
   --transition: 150ms ease;
+}
+
+/* Dark palette: the whole site on navy, with the green accent unchanged. This is the default.
+   The light version is used only when <html data-palette="light"> is set, which the theme
+   button in the header does (and remembers). Without JavaScript the site stays dark. */
+:root:not([data-palette='light']) {
+  color-scheme: dark;
+  --color-background: var(--color-navy);
+  --color-text: #e3eaf2;
+  --color-text-muted: #9fb0c3;
+  --color-border: #24405e;
+  --color-heading: var(--color-white);
+  --surface: var(--color-navy-light);
+  --surface-hover: #1b3757;
+  --tag-bg: rgb(255 255 255 / 0.06);
+  --tag-hover-bg: var(--color-green);
+  --tag-hover-text: var(--color-navy);
+  --focus-color: var(--color-green);
+  --dark-divider: var(--color-border);
 }

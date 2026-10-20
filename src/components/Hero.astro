@@ -1,6 +1,8 @@
 ---
 import { site } from '../data/site';
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
+import portrait from '../assets/jazer-torres-portrait.jpg';
 
 const intro =
   'Nearly 3 years building Java and Spring Boot microservices in banking technology, with a focus on process automation, software quality and maintainable code.';
@@ -79,10 +81,23 @@ const courtLines = [
     </div>
 
     <div class="hero__media">
-      {/* TODO: replace this placeholder with the real portrait (src/assets + astro:assets <Image>).
-          The white photo background works as-is: the white card is the photo frame. */}
+      {/* Above the fold, so it loads eagerly. Astro resizes it and serves WebP; the original in
+          src/assets is never published. widths cover 1x to 4x of the 22rem card (352px),
+          so the photo stays sharp on retina screens and when the visitor zooms in. The browser
+          only downloads the one it needs. */}
       <div class="portrait">
-        <p class="portrait__note">Portrait placeholder</p>
+        <Image
+          src={portrait}
+          alt="Portrait of Jazer Torres wearing a navy pinstripe suit and a burgundy tie"
+          width={704}
+          height={880}
+          widths={[352, 704, 1056, 1408]}
+          sizes="22rem"
+          format="webp"
+          quality={85}
+          loading="eager"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </div>
@@ -95,6 +110,7 @@ const courtLines = [
     padding-block: clamp(3rem, 2rem + 5vw, 6rem);
     background: var(--color-navy);
     color: var(--color-white);
+    border-bottom: 1px solid var(--dark-divider);
   }
 
   /* Court lines sit behind the content, anchored to the bottom right */
@@ -219,7 +235,7 @@ const courtLines = [
     }
   }
 
-  /* Portrait frame: white card with a green outline offset behind it */
+  /* Portrait frame: the photo with a green outline offset behind it */
   .hero__media {
     isolation: isolate; /* keeps the ::before layer inside this component */
   }
@@ -248,9 +264,55 @@ const courtLines = [
     transform: translate(var(--offset), var(--offset));
   }
 
-  .portrait__note {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    color: var(--color-text-muted);
+  /* The <img> lives inside the Image component, so it needs :global to be reached.
+     Rounded here, not with overflow:hidden on the frame, which would also clip the green outline. */
+  .portrait :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 25%; /* keeps the face in frame if the box ever crops */
+    border-radius: var(--radius-md);
+  }
+
+  /* Entrance: each piece of the hero text rises into place, one after another.
+     "backwards" means the animation only controls the element before it starts, so hover
+     effects keep working afterwards. The portrait is left out on purpose: it is the largest
+     element on the page and should appear as soon as it is ready. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__content > * {
+      animation: rise 0.6s ease-out backwards;
+    }
+
+    .hero__content > :nth-child(2) {
+      animation-delay: 0.08s;
+    }
+
+    .hero__content > :nth-child(3) {
+      animation-delay: 0.16s;
+    }
+
+    .hero__content > :nth-child(4) {
+      animation-delay: 0.24s;
+    }
+
+    .hero__content > :nth-child(5) {
+      animation-delay: 0.32s;
+    }
+
+    .hero__content > :nth-child(6) {
+      animation-delay: 0.4s;
+    }
+
+    .hero__content > :nth-child(7) {
+      animation-delay: 0.48s;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
   }
 </style>

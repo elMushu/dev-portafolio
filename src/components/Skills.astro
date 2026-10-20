@@ -15,7 +15,7 @@ import TechTag from './TechTag.astro';
     <div class="skills__grid">
       {
         skillCategories.map((category) => (
-          <div class="category">
+          <div class="category reveal">
             <h3 class="category__name">{category.name}</h3>
             <ul class="tag-list">
               {category.items.map((item) => (
@@ -46,6 +46,6 @@ import TechTag from './TechTag.astro';
   .category__name {
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--color-navy);
+    color: var(--color-heading);
   }
 </style>
