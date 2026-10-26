@@ -1,5 +1,6 @@
 // Professional experience, most recent first.
-// The wording comes from docs/portfolio-text.md (the approved final text). Keep the two in sync.
+// Source of truth: the resume (CV_JazerTorres.pdf, updated Oct 2026). Where this file adds detail,
+// it comes from CLAUDE.md and does not contradict the resume. Keep docs/portfolio-text.md in sync.
 // `confirmed` / `validated` stay false until the information is verified. While false,
 // the page shows a visible "pending" badge so unverified data is not published by accident.
 
@@ -16,7 +17,7 @@ export interface CaseStudy {
   title: string;
   // Context: what this work was about, in one or two sentences
   summary: string;
-  // Responsibilities and actions ("what I did"), kept apart from the outcome
+  // Responsibilities and actions ("what was done"), kept apart from the outcome
   contribution?: string[];
   tags: string[];
   metric?: Metric;
@@ -60,19 +61,18 @@ export const jobs: Job[] = [
     workMode: 'Remote',
     industry: 'Financial Services / Banking Technology',
     positions: [
-      { title: 'Backend Developer Jr', period: 'Nov 2024 – Aug 2026' },
+      { title: 'Junior Backend Developer', period: 'Nov 2024 – Aug 2026' },
       { title: 'Backend Developer Intern', period: 'Jan 2024 – Nov 2024' },
     ],
     summary:
-      'Backend engineering on Java and Spring Boot microservices in a banking technology environment, on the Development Architecture team from June 2024. The path ran from Backend Developer Intern to Backend Developer Jr, with increasing autonomy and responsibility.',
+      'Backend engineering in banking: Java and Spring Boot microservices, REST APIs and internal automation tools, growing from Backend Developer Intern to Junior Backend Developer with increasing autonomy and responsibility.',
     technologies: [
       'Java 11',
       'Spring Boot',
       'Spring Data JPA',
-      'Hibernate / JPA',
+      'Hibernate',
       'REST APIs',
       'Microservices',
-      'SQL',
       'PostgreSQL',
       'Sybase',
       'Redis',
@@ -83,33 +83,25 @@ export const jobs: Job[] = [
       'OpenShift',
       'GitHub Actions',
       'YAML',
-      'TypeScript',
-      'Angular',
       'Claude',
     ],
     highlights: [
       {
         theme: 'Microservices development',
         items: [
-          "Contributed to the development, maintenance and evolution of more than 10 microservices, REST APIs and backend components behind Toolbox, an internal platform of approximately 30 process-automation tools used by the bank's development teams. The work covered business logic, persistence, validation, exception handling and scheduled processes, using PostgreSQL, Sybase and Redis.",
+          'Developed and maintained 10+ Java 11/Spring Boot microservices and REST APIs for Toolbox, an internal platform of ~30 automation tools available to 500+ developers (100–200 active users), with persistence in PostgreSQL, Sybase, and Redis.',
         ],
       },
       {
-        theme: 'Customer login modernization',
+        theme: 'Customer authentication refactor',
         items: [
-          "Removed a legacy user type from the bank's customer login, which serves both individual and business customers, after users were unified under a single access credential. The code that was no longer needed was also cleaned up across the remaining microservices, covering business logic, REST endpoints, persistence, database interactions and error handling. The change was validated with the full test matrix on the Android and iOS apps, checked for no impact on other bank services, and coordinated with the login team and other teams so it could be rolled out across all of the bank's environments.",
+          'Refactored the customer authentication flow across ~12 microservices to retire a legacy user type, preserving individual, business, and self-employed customer scenarios; validated with Android/iOS test matrices and released to all environments.',
         ],
       },
       {
-        theme: 'Testing and software quality',
+        theme: 'Testing, quality and production support',
         items: [
-          'Wrote unit tests with JUnit and Mockito, ran integration and regression testing with testing matrices, debugged issues across microservice and database layers, and resolved quality and security findings from SonarQube and Checkmarx.',
-        ],
-      },
-      {
-        theme: 'Production support and collaboration',
-        items: [
-          'Debugging, troubleshooting and production support were part of the day-to-day work, including occasionally handling production incidents when the senior developer was unavailable and providing on-call support during application deployments. Participation also covered code reviews, estimation, refinement, planning, daily meetings, retrospectives, demos and releases while the team grew from approximately 10 to 15 people.',
+          'Wrote unit, integration, and regression tests (JUnit, Mockito), resolved SonarQube and Checkmarx findings, and backed up production incident response and deployments within a 10–15 person Scrum team.',
         ],
       },
     ],
@@ -117,11 +109,10 @@ export const jobs: Job[] = [
       {
         title: 'Process Automation & Toolbox Reporting',
         summary:
-          "Toolbox is an internal platform of approximately 30 process-automation tools, backed by more than 10 microservices and used by the bank's development teams. The work focused on automating processes that previously required manual database changes and queries.",
+          'Toolbox is an internal platform of ~30 automation tools available to 500+ developers (100–200 active users). The work focused on replacing manual database queries and updates with faster, less error-prone self-service workflows.',
         contribution: [
-          'Created 1 new tool and optimized more than 8 existing tools and solutions, working mainly with Java, Spring Boot, SQL, PostgreSQL and Sybase.',
-          'Worked on Toolbox front-end projects with TypeScript, using an internal framework based on Angular.',
-          'Automated the generation of the Toolbox usage report, with daily, weekly and monthly metrics plus charts, using Java, Spring Boot, Java Swing and JasperReports.',
+          "Built 1 new tool and optimized 8+ existing ones that automate repetitive tasks for the bank's development teams.",
+          "Automated Toolbox's daily, weekly, and monthly usage report with Spring Boot, Java Swing, and JasperReports.",
         ],
         tags: [
           'Java',
@@ -130,8 +121,6 @@ export const jobs: Job[] = [
           'JasperReports',
           'PostgreSQL',
           'Sybase',
-          'TypeScript',
-          'Angular',
         ],
         metric: {
           label: 'Report generation time',
@@ -145,22 +134,13 @@ export const jobs: Job[] = [
       {
         title: 'AI-Assisted Documentation Pipeline',
         summary:
-          'A proof of concept for centralizing technical and business documentation from approximately 3 internal services across multiple repositories, using an AI agent.',
+          'A multi-repository AI documentation workflow for 3 internal banking services, planned for bank-wide use.',
         contribution: [
-          'Started from an initial prompt that was not producing the expected results and designed a new one, written in English with more precise and restrictive instructions.',
-          'Tested instruction variants to find which ones used fewer tokens and processed faster.',
-          'Pre-installed skills before each agent run to speed up execution.',
-          'Configured YAML service definitions and multi-repository workflows with Claude, GitHub and GitHub Actions to generate centralized documentation such as READMEs.',
+          'Evolved a starter template into a multi-repository AI documentation workflow using Claude, GitHub Actions, and service.yaml.',
         ],
-        tags: [
-          'Claude',
-          'Prompt design',
-          'GitHub Actions',
-          'YAML',
-          'Multi-repository workflows',
-        ],
+        tags: ['Claude', 'GitHub Actions', 'YAML', 'Multi-repository workflows'],
         metric: {
-          label: 'Average agent execution time',
+          label: 'Run time',
           from: '~15 min',
           to: '~5–7 min',
           reduction: '~53–67% less time',
@@ -171,17 +151,17 @@ export const jobs: Job[] = [
       {
         title: 'High Availability Initiative',
         summary:
-          'A production High Availability initiative across Banregio and Hey Banco to standardize microservice configurations across many teams and repositories.',
+          'A High Availability initiative across Banregio and Hey Banco to standardize YAML/OpenShift microservice configurations.',
         contribution: [
-          'Coordinated and followed up with multiple development teams on the tasks needed to standardize their microservice configurations.',
-          'Validated YAML configurations for OpenShift and troubleshot deployment-related issues.',
+          'Coordinated with multiple development teams to standardize YAML/OpenShift microservice configurations.',
+          'Troubleshot deployment issues.',
         ],
         tags: ['OpenShift', 'YAML', 'Cross-team coordination', 'Troubleshooting'],
         validated: true,
       },
     ],
     growth:
-      'Moving from intern to Backend Developer Jr meant gradually taking on more autonomy and responsibility: from guided tasks to removing a legacy user type from the customer login, coordinating configuration work with other teams, redesigning an AI documentation workflow, and covering production incidents when needed.',
+      'Moving from intern to Junior Backend Developer meant gradually taking on more autonomy and responsibility: from guided tasks to refactoring the customer authentication flow across ~12 microservices, coordinating configuration work with other teams, evolving an AI documentation workflow, and backing up production incident response.',
   },
   {
     company: 'OneCard',
@@ -195,7 +175,7 @@ export const jobs: Job[] = [
       },
     ],
     summary:
-      'A part-time internship of approximately 1 year and 7 months, done alongside university studies. It spanned approximately 5 internal projects and functionalities, with hands-on work in REST API integration, SQL Server and Front-End development in a financial technology environment.',
+      'A part-time internship of approximately 1 year and 7 months, done alongside university studies. It spanned ~5 internal features, with hands-on work in REST API integration, SQL Server and Front-End development in a financial technology environment.',
     technologies: [
       'REST APIs',
       'JSON',
@@ -215,19 +195,13 @@ export const jobs: Job[] = [
       {
         theme: 'REST API integration',
         items: [
-          'Consumed and integrated REST APIs, working with endpoints, parameters, payloads, JSON, HTTP status codes, and response and error handling, coordinating each integration directly with a backend developer.',
+          'Integrated REST APIs with the backend team, working with endpoints, parameters, payloads, JSON, HTTP status codes, and response and error handling.',
         ],
       },
       {
-        theme: 'Database work',
+        theme: 'Database work and administrative features',
         items: [
-          'Wrote SQL Server queries using SELECT, JOIN, INSERT, UPDATE and DELETE statements, including validation queries.',
-        ],
-      },
-      {
-        theme: 'Administrative functionality',
-        items: [
-          'Worked on administrative forms, validations and PDF reports, and took part in debugging, demos, code reviews and presentations.',
+          'Wrote SQL Server queries for ~5 internal features, including admin forms and PDF reports, using SELECT, JOIN, INSERT, UPDATE and DELETE statements and validation queries.',
         ],
       },
     ],
@@ -235,13 +209,13 @@ export const jobs: Job[] = [
       {
         title: 'Transaction Monitoring Application',
         summary:
-          'An internal production application used for near-real-time monitoring of OneCard product transactions. The work centered on its Front-End.',
+          'A production transaction-monitoring app used for near-real-time monitoring of OneCard product transactions. The work centered on its Front-End.',
         contribution: [
-          'Built 4 Chart.js visualizations showing successful transactions, failed transactions, transaction volume and recent activity, with approximately 3 hours of transaction history.',
-          'Consumed REST APIs to display transaction data in near real time.',
+          'Built the front end with JavaScript, jQuery, and Chart.js, including 4 near-real-time charts showing successful transactions, failed transactions, transaction volume and recent activity, with approximately 3 hours of transaction history.',
+          'Integrated REST APIs with the backend team to display transaction data in near real time.',
           'Implemented visual and sound alerts that trigger after more than 5 consecutive failed transactions.',
         ],
-        tags: ['Chart.js', 'JavaScript', 'REST APIs'],
+        tags: ['Chart.js', 'JavaScript', 'jQuery', 'REST APIs'],
         validated: true,
       },
     ],
@@ -260,7 +234,7 @@ export const jobs: Job[] = [
       },
     ],
     summary:
-      'The first professional software development experience: a part-time internship of approximately 2 years and 5 months, spanning approximately 3 internal systems and 20+ features and tasks.',
+      'The first professional software development experience: a part-time internship of approximately 2 years and 5 months, delivering 20+ features across ~3 internal systems.',
     technologies: [
       'Java 11',
       'Spring Boot',
@@ -281,7 +255,7 @@ export const jobs: Job[] = [
       {
         theme: 'Systems',
         items: [
-          "Most of the work went into the university's Academic System, used daily by students, professors, employees and administrative departments, with additional work on the Asset Management System and one more institutional system.",
+          'Most of the work went into the Academic System, used daily by students, faculty, and staff, with additional work on the Asset Management System and one more institutional system.',
         ],
       },
       {
@@ -293,7 +267,7 @@ export const jobs: Job[] = [
       {
         theme: 'Requirements and collaboration',
         items: [
-          'Met with Finance and other areas to understand business needs, then worked with the development team to translate them into functional and technical changes, in a team of approximately 6 people that included developers, interns and a team lead.',
+          'Translated requirements from Finance and other departments into system changes within a 6-person team that included developers, interns and a team lead.',
         ],
       },
     ],

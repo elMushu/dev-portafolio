@@ -1,4 +1,4 @@
-// Skills grouped by category. Sources: resume (CV_JazerTorres.pdf) and CLAUDE.md (portfolio context).
+// Skills grouped by category, exactly as in the resume (CV_JazerTorres.pdf, updated Oct 2026).
 // No percentages or levels on purpose: a plain list is more honest and easier to scan.
 // Order matters: backend-related categories come first because that is the target role.
 
@@ -9,8 +9,8 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    name: 'Languages',
-    items: ['Java', 'SQL', 'JavaScript', 'TypeScript'],
+    name: 'Programming',
+    items: ['Java', 'SQL', 'JavaScript'],
   },
   {
     name: 'Backend',
@@ -18,74 +18,37 @@ export const skillCategories: SkillCategory[] = [
       'Spring Boot',
       'Spring MVC',
       'Spring Data JPA',
-      'Hibernate / JPA',
+      'Hibernate',
+      'Spring Security',
+      'JWT',
       'REST APIs',
       'Microservices',
+      'Swagger/OpenAPI',
     ],
   },
   {
     name: 'Databases',
-    items: ['PostgreSQL', 'Redis', 'Sybase', 'SQL Server', 'Oracle'],
+    items: ['PostgreSQL', 'Sybase', 'Oracle', 'SQL Server', 'Redis'],
   },
   {
     name: 'Testing & Quality',
-    items: [
-      'JUnit',
-      'Mockito',
-      'Unit testing',
-      'Integration testing',
-      'Regression testing',
-      'SonarQube',
-      'Checkmarx',
-    ],
+    items: ['JUnit', 'Mockito', 'Postman', 'SonarQube', 'Checkmarx'],
   },
   {
-    name: 'Platforms & Tools',
-    items: [
-      'OpenShift',
-      'Maven',
-      'Git',
-      'GitHub',
-      'GitHub Actions',
-      'CI/CD',
-      'YAML',
-    ],
+    name: 'DevOps & Tools',
+    items: ['Git', 'GitHub Actions', 'Maven', 'OpenShift', 'JasperReports', 'Jira'],
   },
   {
-    name: 'AI-Assisted Workflows',
-    items: [
-      'Claude',
-      'Prompt design',
-      'Documentation automation',
-      'Multi-repository workflows',
-    ],
+    name: 'AI-Assisted Engineering',
+    items: ['Claude', 'Prompt and workflow design', 'GitHub Actions automation'],
   },
   {
-    name: 'Engineering Practices',
+    name: 'Practices',
     items: [
+      'Agile/Scrum',
       'Code reviews',
-      'Estimation & refinement',
-      'Planning',
-      'Retrospectives',
-      'Demos',
-      'Releases',
-      'Production support',
-      'Troubleshooting',
-    ],
-  },
-  {
-    name: 'Frontend & Reporting',
-    items: [
-      'Angular',
-      'HTML',
-      'CSS',
-      'AJAX',
-      'jQuery',
-      'Bootstrap',
-      'Thymeleaf',
-      'Chart.js',
-      'Java Swing',
-      'JasperReports',
+      'Incident response',
+      'Technical documentation',
     ],
   },
 ];
